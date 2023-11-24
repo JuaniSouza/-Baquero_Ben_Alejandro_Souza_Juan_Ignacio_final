@@ -1,7 +1,8 @@
 package com.backend.clinicaodontologica.entity;
 
 import javax.persistence.*;
-
+@Entity
+@Table(name = "DOMICILIOS")
 public class Domicilio {
 
     @Id

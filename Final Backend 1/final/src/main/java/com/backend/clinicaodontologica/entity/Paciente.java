@@ -2,7 +2,8 @@ package com.backend.clinicaodontologica.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
+@Entity
+@Table(name = "PACIENTES")
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
