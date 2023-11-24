@@ -4,7 +4,7 @@ import com.backend.clinicaodontologica.dto.entrada.paciente.PacienteEntradaDto;
 import com.backend.clinicaodontologica.dto.modificacion.PacienteModificacionEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.paciente.PacienteSalidaDto;
 import com.backend.clinicaodontologica.exceptions.ResourceNotFoundException;
-
+import com.backend.clinicaodontologica.entity.Paciente;
 
 import java.util.List;
 public interface IPacienteService {
@@ -19,4 +19,6 @@ public interface IPacienteService {
     void eliminarPaciente(Long id) throws ResourceNotFoundException;
 
     PacienteSalidaDto buscarPacientePorDni(int dni);
+
+    Paciente entidadPaciente(Long id);
 }

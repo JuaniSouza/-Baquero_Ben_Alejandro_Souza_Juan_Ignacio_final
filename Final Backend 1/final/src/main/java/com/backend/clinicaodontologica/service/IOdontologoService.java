@@ -4,6 +4,7 @@ import com.backend.clinicaodontologica.dto.entrada.odontologo.OdontologoEntradaD
 import com.backend.clinicaodontologica.dto.modificacion.OdontologoModificacionEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.odontologo.OdontologoSalidaDto;
 import com.backend.clinicaodontologica.exceptions.ResourceNotFoundException;
+import com.backend.clinicaodontologica.entity.Odontologo;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface IOdontologoService {
     void eliminarOdontologo(Long id) throws ResourceNotFoundException;
 
     OdontologoSalidaDto actualizarOdontologo(OdontologoModificacionEntradaDto odontologoModificacionEntradaDto) throws ResourceNotFoundException;
+
+    Odontologo entidadOdontologo(Long id);
 }
