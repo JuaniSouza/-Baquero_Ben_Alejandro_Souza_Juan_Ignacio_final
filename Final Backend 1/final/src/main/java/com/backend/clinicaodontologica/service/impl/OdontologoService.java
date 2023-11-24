@@ -96,4 +96,9 @@ public class OdontologoService implements IOdontologoService {
         return modelMapper.map(odontologoEntradaDto, Odontologo.class);
     }
 
+    @Override
+    public Odontologo entidadOdontologo(Long id) {
+        return odontologoRepository.findById(id).orElse(null);
+    }
+
 }

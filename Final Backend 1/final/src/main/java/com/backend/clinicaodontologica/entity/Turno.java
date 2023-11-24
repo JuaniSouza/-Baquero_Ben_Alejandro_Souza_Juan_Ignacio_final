@@ -24,10 +24,16 @@ public class Turno {
     }
 
     public Turno(LocalDateTime fechaYHora, Odontologo odontologo, Paciente paciente) {
-
         this.fechaYHora = fechaYHora;
         this.odontologo = odontologo;
         this.paciente = paciente;
+    }
+
+    public Turno(Long id, LocalDateTime fechaYHora, Paciente paciente, Odontologo odontologo) {
+        this.id = id;
+        this.fechaYHora = fechaYHora;
+        this.paciente = paciente;
+        this.odontologo = odontologo;
     }
 
     public Long getId() {

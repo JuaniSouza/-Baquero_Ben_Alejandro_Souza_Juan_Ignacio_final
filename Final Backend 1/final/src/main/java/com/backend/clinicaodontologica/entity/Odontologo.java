@@ -8,13 +8,16 @@ public class Odontologo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String numeroMatricula;
+    @Column(length = 50)
+    private String matricula;
+    @Column(length = 50)
     private String nombre;
+    @Column(length = 50)
     private String apellido;
 
 
     public Odontologo(String numeroMatricula, String nombre, String apellido) {
-        this.numeroMatricula = numeroMatricula;
+        this.matricula = matricula;
         this.nombre = nombre;
         this.apellido = apellido;
     }
@@ -28,11 +31,11 @@ public class Odontologo {
     }
 
     public String getNumeroMatricula() {
-        return numeroMatricula;
+        return matricula;
     }
 
     public void setNumeroMatricula(String numeroMatricula) {
-        this.numeroMatricula = numeroMatricula;
+        this.matricula = matricula;
     }
 
     public String getNombre() {
@@ -53,7 +56,7 @@ public class Odontologo {
 
     @Override
     public String toString() {
-        return "Id: " + id + " - Nombre: " + nombre + " - Apellido: " + apellido + " - Matricula: " + numeroMatricula;
+        return "Id: " + id + " - Nombre: " + nombre + " - Apellido: " + apellido + " - Matricula: " + matricula;
     }
 }
 

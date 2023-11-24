@@ -105,11 +105,15 @@ public class PacienteService implements IPacienteService{
         }
 
     }
-        @Override
+        /*@Override
         public PacienteSalidaDto buscarPacientePorDni(int dni) {
             return modelMapper.map(pacienteRepository.findByDni(dni), PacienteSalidaDto.class);
         }
-
+*/
+        @Override
+        public Paciente entidadPaciente(Long id) {
+        return pacienteRepository.findById(id).orElse(null);
+    }
         private void configureMapping() {
             modelMapper.typeMap(PacienteEntradaDto.class, Paciente.class)
                     .addMappings(mapper -> mapper.map(PacienteEntradaDto::getDomicilioEntradaDto, Paciente::setDomicilio));

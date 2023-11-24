@@ -37,17 +37,17 @@ public class TurnoService implements ITurnoService {
     }
 
     @Override
-    public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoRequestDto) {
-        PacienteSalidaDto pacienteFindId = pacienteService.buscarPorId(turnoRequestDto.getPaciente_id());
+    public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto) {
+        PacienteSalidaDto pacienteFindId = pacienteService.buscarPacientePorId(turnoEntradaDto.getPaciente_id());
         Paciente pacienteEntidad = pacienteService.entidadPaciente(pacienteFindId.getId());
         LOGGER.info("Paciente del turno: {}", JsonPrinter.toString(pacienteEntidad));
-        OdontologoResponseDto odontologoFindId = odontologoService.buscarPorId(turnoRequestDto.getOdontologo_id());
+        OdontologoSalidaDto odontologoFindId = odontologoService.buscarOdontologoPorId(turnoEntradaDto.getOdontologo_id());
         Odontologo odontologoEntidad = odontologoService.entidadOdontologo(odontologoFindId.getId());
         LOGGER.info("Odontologo del turno: {}", JsonPrinter.toString(odontologoEntidad));
         Turno turnoEntidad = new Turno();
         turnoEntidad.setPaciente(pacienteEntidad);
         turnoEntidad.setOdontologo(odontologoEntidad);
-        turnoEntidad.setFechaYHora(turnoRequestDto.getFechaYHora());
+        turnoEntidad.setFechaYHora(turnoEntradaDto.getFechaYHora());
         LOGGER.info("Entidad: " + JsonPrinter.toString(turnoEntidad));
 
         Turno turnoAPersistir = turnoRepository.save(turnoEntidad);
@@ -88,10 +88,10 @@ public class TurnoService implements ITurnoService {
         TurnoSalidaDto turnoResponseDto = null;
         Paciente paciente = pacienteService.entidadPaciente(turno.getPaciente_id());
         Odontologo odontologo = odontologoService.entidadOdontologo(turno.getOdontologo_id());
-        Turno turnoUpdate = new Turno(turno.getId(), turno.getFechaYHora(), paciente, odontologo);
+        Turno turnoActualizacion = new Turno(turno.getId(), turno.getFechaYHora(), paciente, odontologo);
         Turno turnoModified = turnoRepository.findById(turno.getId()).orElse(null);
         if (turnoModified != null) {
-            turnoModified = turnoUpdate;
+            turnoModified = turnoActualizacion;
             turnoRepository.save(turnoModified);
             turnoResponseDto = new TurnoSalidaDto(turnoModified.getId(), turnoModified.getFechaYHora(), turnoModified.getOdontologo().getId(), turnoModified.getPaciente().getId());
             LOGGER.warn("Turno actualizado: {}", JsonPrinter.toString(turnoModified));

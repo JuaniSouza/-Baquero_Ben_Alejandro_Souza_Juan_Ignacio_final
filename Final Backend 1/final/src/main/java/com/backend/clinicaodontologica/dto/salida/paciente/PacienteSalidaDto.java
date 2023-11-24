@@ -20,7 +20,7 @@ public class PacienteSalidaDto {
         this.domicilioSalidaDto = domicilioSalidaDto;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
