@@ -25,7 +25,6 @@ public class OdontologoController {
         this.odontologoService = odontologoService;
     }
 
-   //PUT
 
     @PostMapping("registrar")
 
@@ -33,14 +32,14 @@ public class OdontologoController {
         return new ResponseEntity<>(odontologoService.registrarOdontologo(odontologo), HttpStatus.CREATED);
     }
 
-    //PUT
+
 
     @PutMapping("actualizar")
     public ResponseEntity<OdontologoSalidaDto> actualizarOdontologo(@Valid @RequestBody OdontologoModificacionEntradaDto odontologo) throws ResourceNotFoundException {
         return new ResponseEntity<>(odontologoService.actualizarOdontologo(odontologo), HttpStatus.OK);
     }
 
-    //GET
+
 
     @GetMapping("{id}")
     public ResponseEntity<OdontologoSalidaDto> obtenerOdontologoPorId(@PathVariable Long id) {
@@ -53,8 +52,6 @@ public class OdontologoController {
     public ResponseEntity<List<OdontologoSalidaDto>> listarOdontologos() {
         return new ResponseEntity<>(odontologoService.listarOdontologos(), HttpStatus.OK);
     }
-
-    //DELETE
 
     @DeleteMapping("eliminar/{id}")
     public ResponseEntity<?> eliminarOdontologo(@PathVariable Long id) throws ResourceNotFoundException {
