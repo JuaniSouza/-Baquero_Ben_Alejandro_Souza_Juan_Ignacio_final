@@ -11,6 +11,7 @@ import com.backend.clinicaodontologica.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.backend.clinicaodontologica.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -94,15 +95,16 @@ public class PacienteService implements IPacienteService{
     }
 
     @Override
-    public void eliminarPaciente(Long id) {
+    public void eliminarPaciente(Long id) throws ResourceNotFoundException {
         if (pacienteRepository.findById(id).orElse(null) != null) {
             pacienteRepository.deleteById(id);
             LOGGER.warn("Se ha eliminado el paciente con id: {}", id);
         } else {
             LOGGER.error("No se ha encontrado el paciente con id {}", id);
-            //excepcion a lanzar aqui
+            throw new ResourceNotFoundException("No se ha encontrado el paciente con id " + id);
         }
 
+    }
         @Override
         public PacienteSalidaDto buscarPacientePorDni(int dni) {
             return modelMapper.map(pacienteRepository.findByDni(dni), PacienteSalidaDto.class);
@@ -114,8 +116,8 @@ public class PacienteService implements IPacienteService{
             modelMapper.typeMap(Paciente.class, PacienteSalidaDto.class)
                     .addMappings(modelMapper -> modelMapper.map(Paciente::getDomicilio, PacienteSalidaDto::setDomicilioSalidaDto));
             modelMapper.typeMap(PacienteModificacionEntradaDto.class, Paciente.class)
-                    .addMappings(mapper -> mapper.map(PacienteModificacionEntradaDto::getDomicilioEntradaDto, Paciente::setDomicilio));
+                    .addMappings(mapper -> mapper.map(PacienteModificacionEntradaDto::getDomicilioModificacionEntradaDto, Paciente::setDomicilio));
 
-        }
+    }
 
     }
