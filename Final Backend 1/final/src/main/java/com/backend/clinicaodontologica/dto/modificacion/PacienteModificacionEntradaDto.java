@@ -44,13 +44,13 @@ public class PacienteModificacionEntradaDto {
     public PacienteModificacionEntradaDto() {
     }
 
-    public PacienteModificacionEntradaDto(Long id, String nombre, String apellido, Integer dni, LocalDate fechaIngreso, DomicilioModificacionEntradaDto domicilioEntradaDto) {
+    public PacienteModificacionEntradaDto(Long id, String nombre, String apellido, Integer dni, LocalDate fechaIngreso, DomicilioModificacionEntradaDto domicilioModificacionEntradaDto) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.fechaIngreso = fechaIngreso;
-        this.domicilioModificacionEntradaDto = domicilioEntradaDto;
+        this.domicilioModificacionEntradaDto = domicilioModificacionEntradaDto;
     }
 
     public Long getId() {
