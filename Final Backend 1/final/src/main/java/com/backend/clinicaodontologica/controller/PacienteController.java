@@ -30,7 +30,7 @@ public class PacienteController {
 
 
     //GET
-    @GetMapping("/buscarPorId")
+    @GetMapping("{id}")
     public ResponseEntity<PacienteSalidaDto> obtenerPacientePorId(@PathVariable Long id) {
         return new ResponseEntity<>(pacienteService.buscarPacientePorId(id), HttpStatus.OK);
     }
@@ -47,7 +47,7 @@ public class PacienteController {
     }
 
     //DELETE
-    @DeleteMapping("eliminar")
+    @DeleteMapping("eliminar/{id}")
     public ResponseEntity<?> eliminarPaciente(@PathVariable Long id) throws ResourceNotFoundException {
         pacienteService.eliminarPaciente(id);
         return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.OK);

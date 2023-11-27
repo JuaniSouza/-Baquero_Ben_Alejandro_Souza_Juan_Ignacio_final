@@ -35,12 +35,12 @@ public class TurnoController {
         return turnoService.actualizarTurno(turno);
     }
 
-    @DeleteMapping("/eliminar")
+    @DeleteMapping("eliminar/{id}")
     public ResponseEntity<?> eliminarTurno(@RequestParam Long id) {
         turnoService.eliminarTurno(id);
         return new ResponseEntity<>("Turno eliminado correctamente", HttpStatus.OK);
     }
-    @GetMapping("/buscarPorId")
+    @GetMapping("{id}")
     public ResponseEntity<TurnoSalidaDto> buscarPorId(@RequestParam Long id){
         return new ResponseEntity<>(turnoService.buscarPorId(id), HttpStatus.OK);
     }
