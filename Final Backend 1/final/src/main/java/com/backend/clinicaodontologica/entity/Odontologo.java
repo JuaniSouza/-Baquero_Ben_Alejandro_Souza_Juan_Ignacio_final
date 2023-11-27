@@ -16,7 +16,7 @@ public class Odontologo {
     private String apellido;
 
 
-    public Odontologo(String numeroMatricula, String nombre, String apellido) {
+    public Odontologo(String matricula, String nombre, String apellido) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -30,11 +30,11 @@ public class Odontologo {
         this.id = id;
     }
 
-    public String getNumeroMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setNumeroMatricula(String numeroMatricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
