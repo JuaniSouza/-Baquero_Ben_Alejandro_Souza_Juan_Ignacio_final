@@ -38,23 +38,36 @@ public class TurnoService implements ITurnoService {
 
     @Override
     public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto) {
-        PacienteSalidaDto pacienteFindId = pacienteService.buscarPacientePorId(turnoEntradaDto.getPaciente_id());
-        Paciente pacienteEntidad = pacienteService.entidadPaciente(pacienteFindId.getId());
+        // Buscar paciente por ID
+        PacienteSalidaDto pacienteSalidaDto = pacienteService.buscarPacientePorId(turnoEntradaDto.getPaciente_id());
+        Paciente pacienteEntidad = pacienteService.entidadPaciente(pacienteSalidaDto.getId());
         LOGGER.info("Paciente del turno: {}", JsonPrinter.toString(pacienteEntidad));
-        OdontologoSalidaDto odontologoFindId = odontologoService.buscarOdontologoPorId(turnoEntradaDto.getOdontologo_id());
-        Odontologo odontologoEntidad = odontologoService.entidadOdontologo(odontologoFindId.getId());
+
+        // Buscar odontólogo por ID
+        OdontologoSalidaDto odontologoSalidaDto = odontologoService.buscarOdontologoPorId(turnoEntradaDto.getOdontologo_id());
+        Odontologo odontologoEntidad = odontologoService.entidadOdontologo(odontologoSalidaDto.getId());
         LOGGER.info("Odontologo del turno: {}", JsonPrinter.toString(odontologoEntidad));
+
+        // Crear entidad de turno
         Turno turnoEntidad = new Turno();
         turnoEntidad.setPaciente(pacienteEntidad);
         turnoEntidad.setOdontologo(odontologoEntidad);
         turnoEntidad.setFechaYHora(turnoEntradaDto.getFechaYHora());
-        LOGGER.info("Entidad: " + JsonPrinter.toString(turnoEntidad));
+        LOGGER.info("Entidad: {}", JsonPrinter.toString(turnoEntidad));
 
-        Turno turnoAPersistir = turnoRepository.save(turnoEntidad);
-        LOGGER.info("Turno a persistir: " + JsonPrinter.toString(turnoAPersistir));
+        // Persistir el turno
+        Turno turnoPersistido = turnoRepository.save(turnoEntidad);
+        LOGGER.info("Turno persistido: {}", JsonPrinter.toString(turnoPersistido));
 
-        TurnoSalidaDto turnoSalidaDto = new TurnoSalidaDto(turnoAPersistir.getId(), turnoAPersistir.getFechaYHora(), odontologoEntidad.getId(), pacienteFindId.getId());
-        LOGGER.info("TurnoSalidaDto: " + JsonPrinter.toString(turnoSalidaDto));
+        // Crear DTO de salida
+        TurnoSalidaDto turnoSalidaDto = new TurnoSalidaDto(
+                turnoPersistido.getId(),
+                turnoPersistido.getFechaYHora(),
+                odontologoEntidad.getId(),
+                pacienteSalidaDto.getId()
+        );
+        LOGGER.info("TurnoSalidaDto: {}", JsonPrinter.toString(turnoSalidaDto));
+
         return turnoSalidaDto;
     }
 
@@ -110,4 +123,5 @@ public class TurnoService implements ITurnoService {
             LOGGER.error("No se ha encontrado el turno con el id: " + id);
         }
     }
+
 }
