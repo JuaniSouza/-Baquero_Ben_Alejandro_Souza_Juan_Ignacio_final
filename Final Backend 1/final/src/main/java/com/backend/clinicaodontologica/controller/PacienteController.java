@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pacientes")
+@CrossOrigin
 public class PacienteController {
 
     private IPacienteService pacienteService;
@@ -52,4 +53,6 @@ public class PacienteController {
         pacienteService.eliminarPaciente(id);
         return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.OK);
     }
+
+
 }
