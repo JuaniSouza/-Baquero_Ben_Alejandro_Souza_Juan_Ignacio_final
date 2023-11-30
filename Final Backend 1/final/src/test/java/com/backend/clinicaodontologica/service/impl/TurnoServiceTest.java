@@ -33,15 +33,12 @@ class TurnoServiceTest {
     @Test
     @Order(1)
     void deberiaRegistrarUnTurnoYRetornarElId() {
-        // Crear odontólogo
         OdontologoEntradaDto odontologoEntradaDto = new OdontologoEntradaDto("123434234", "JUAN", "SOUZA");
         OdontologoSalidaDto odontologoSalidaDto = odontologoService.registrarOdontologo(odontologoEntradaDto);
 
-        // Crear paciente
         PacienteEntradaDto pacienteEntradaDto = new PacienteEntradaDto("Juan", "Perez", 123456789, LocalDate.of(2000, 12, 24), new DomicilioEntradaDto("calle", 1234, "Localidad", "Provincia"));
         PacienteSalidaDto pacienteSalidaDto = pacienteService.registrarPaciente(pacienteEntradaDto);
 
-        // Crear turno
         TurnoEntradaDto turnoEntradaDto = new TurnoEntradaDto(LocalDateTime.now().plusDays(1), odontologoSalidaDto.getId(), pacienteSalidaDto.getId());
 
         TurnoSalidaDto turnoSalidaDto = turnoService.registrarTurno(turnoEntradaDto);
@@ -52,7 +49,6 @@ class TurnoServiceTest {
         assertEquals(pacienteSalidaDto.getId(), turnoSalidaDto.getPaciente_id());
     }
 
-
     @Test
     @Order(2)
     void deberiaDevolverUnaListaDeTurnosNoVacia() {
@@ -60,30 +56,6 @@ class TurnoServiceTest {
 
         assertFalse(turnosDto.isEmpty());
     }
-/*
-    @Test
-    @Order(3)
-    void deberiaDevolverUnTurnoConId1() {
-        TurnoSalidaDto turnoDto = turnoService.buscarPorId(1L);
-
-        assertNotNull(turnoDto);
-        assertEquals(1L, turnoDto.getId());
-    }
-
-    @Test
-    @Order(4)
-    void deberiaActualizarUnTurnoConId1YRetornarElTurnoModificado() {
-        TurnoModificacionEntradaDto turnoModificacionDto = new TurnoModificacionEntradaDto(1L, LocalDateTime.now().plusDays(2), 2L, 2L);
-
-        TurnoSalidaDto turnoSalidaDto = turnoService.actualizarTurno(turnoModificacionDto);
-
-        assertNotNull(turnoSalidaDto);
-        assertEquals(1L, turnoSalidaDto.getId());
-        assertEquals(turnoModificacionDto.getFechaYHora(), turnoSalidaDto.getFechaYHoraTurno());
-        assertEquals(turnoModificacionDto.getOdontologo_id(), turnoSalidaDto.getOdontologo_id());
-        assertEquals(turnoModificacionDto.getPaciente_id(), turnoSalidaDto.getPaciente_id());
-    }
-    */
 
     @Test
     @Order(3)
